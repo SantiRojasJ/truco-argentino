@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truco Argentino - Juego de Cartas Online Gratis</title>
+  <meta name="description" content="Jugá al Truco Argentino online gratis contra la computadora. Aprendé las reglas, cantá Truco y Envido y ganá la partida. Juego de cartas 100% en español." />
+  <meta name="keywords" content="truco, juego de cartas, truco argentino, card game, truco online, jugar truco, envido, truco gratis" />
+  <meta name="author" content="Truco Game" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://truco-argentino.netlify.app/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Truco Argentino - Juego de Cartas Online" />
+  <meta property="og:description" content="Jugá al Truco Argentino online gratis contra la IA. Cantá Truco, Envido y demostrá quién manda en la mesa." />
+  <meta property="og:image" content="https://truco-argentino.netlify.app/assets/cards/individual/ace_of_swords.png" />
+  <meta property="og:url" content="https://truco-argentino.netlify.app/" />
+  <meta property="og:site_name" content="Truco Argentino" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Truco Argentino - Juego de Cartas Online" />
+  <meta name="twitter:description" content="Jugá al Truco Argentino online gratis contra la IA. ¡Cantá Truco y ganá!" />
+  <meta name="twitter:image" content="https://truco-argentino.netlify.app/assets/cards/individual/ace_of_swords.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Truco Argentino",
+    "description": "Juego de cartas Truco Argentino para jugar online gratis",
+    "genre": "Card Game",
+    "gamePlatform": "Web Browser",
+    "operatingSystem": "Any",
+    "applicationCategory": "Game",
+    "inLanguage": "es",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="icon" href="assets/cards/individual/card_back.png" />
+</head>
+<body>
+  <main class="presentacion">
+
+    <div class="sol-de-mayo" aria-hidden="true"></div>
+    <h1 class="titulo">TRUCO</h1>
+    <p class="subtitulo">Un juego de cartas bien argentino</p>
+    <p class="frase-text">Jugá y divertite</p>
+    <div class="opcion-puntos">
+      <label>Puntos para ganar:</label>
+      <select id="puntos-limite">
+        <option value="30">30 puntos (Buenas)</option>
+        <option value="45">45 puntos (Larga)</option>
+        <option value="15">15 puntos (Malas)</option>
+      </select>
+    </div>
+
+    <div class="opcion-personalidad">
+      <label>Personalidad del rival:</label>
+      <select id="personalidad-rival">
+        <option value="agresivo">Agresivo 🦡</option>
+        <option value="equilibrado" selected>Equilibrado ⚖️</option>
+        <option value="conservador">Conservador 🐢</option>
+      </select>
+    </div>
+
+    <section id="app">
+      <div class="botones-inicio">
+        <button type="button" id="btn-jugar" class="btn-jugar">
+          JUGAR
+        </button>
+        <button type="button" id="btn-partidas" class="btn-secundario">
+          PARTIDAS
+        </button>
+      </div>
+    </section>
+    <div class="watermark-bottom">
+      <span class="watermark-item">DEMO</span>
+      <span class="watermark-sep">•</span>
+      <span class="watermark-item">Versión 1.0</span>
+    </div>
+  </main>
+
+  <main id="lista-partidas" class="hidden">
+    <div class="lista-header">
+      <h2>PARTIDAS</h2>
+      <button type="button" id="btn-nueva-partida" class="btn-jugar">
+        + NUEVA PARTIDA
+      </button>
+    </div>
+    <div class="lista-content">
+      <h3>En Curso</h3>
+      <div id="partidas-curso"></div>
+      <h3>Finalizadas</h3>
+      <div id="partidas-finalizadas"></div>
+    </div>
+    <button type="button" id="btn-volver-partidas" class="btn-volver">
+      VOLVER
+    </button>
+    <div class="bug-report-container">
+      <button type="button" id="btn-reportar-bug" class="btn-bug">
+        Comentarios
+      </button>
+    </div>
+  </main>
+
+  <main id="game" class="hidden">
+    <div class="game-header">
+      <h2>Partida #<span id="numero-partida">1</span></h2>
+    </div>
+    <div id="banner-baza" class="banner-baza hidden" role="status" aria-live="polite"></div>
+    <div class="mesa">
+      <div class="area-rival"></div>
+      <div class="area-mesa">
+        <span class="label-mesa">Mesa</span>
+      </div>
+      <div class="area-jugador"></div>
+      <div class="cantar-area">
+        <button type="button" id="btn-envido" class="btn-opcion">Envido</button>
+        <button type="button" id="btn-real-envido" class="btn-opcion">Real Envido</button>
+        <button type="button" id="btn-falta-envido" class="btn-opcion">Falta Envido</button>
+        <button type="button" id="btn-truco" class="btn-opcion btn-truco">Truco</button>
+        <button type="button" id="btn-retruco" class="btn-opcion btn-truco">ReTruco</button>
+        <button type="button" id="btn-valecuatro" class="btn-opcion btn-truco">Vale4</button>
+        <button type="button" id="btn-ir-al-mazo" class="btn-opcion btn-ir-mazo">IR AL MAZO</button>
+      </div>
+      <div class="respuesta-area hidden" id="respuesta-area" role="alert" aria-live="polite">
+        <span class="respuesta-texto"><span id="texto-quien">El rival cantó</span>: <span id="texto-canto">Truco</span><span id="texto-espera" class="hidden"></span></span>
+        <button type="button" id="btn-quiero" class="btn-opcion btn-quiero">QUIERO</button>
+        <button type="button" id="btn-no-quiero" class="btn-opcion btn-no-quiero">NO QUIERO</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="modal-bug" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Comentarios</h3>
+        <button type="button" id="btn-cerrar-bug" class="btn-cerrar">×</button>
+      </div>
+      <form id="form-bug" class="form-bug" enctype="multipart/form-data" novalidate>
+        <div class="form-group">
+          <label for="bug-nombre">Nombre</label>
+          <input type="text" id="bug-nombre" name="nombre" required autocomplete="given-name" />
+        </div>
+        <div class="form-group">
+          <label for="bug-apellido">Apellido</label>
+          <input type="text" id="bug-apellido" name="apellido" required autocomplete="family-name" />
+        </div>
+        <div class="form-group">
+          <label for="bug-captura">Captura de pantalla</label>
+          <input type="file" id="bug-captura" name="captura" accept="image/*" />
+        </div>
+        <div class="form-group">
+          <label for="bug-descripcion">Descripción</label>
+          <textarea id="bug-descripcion" name="descripcion" rows="4" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-enviar-bug">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="scripts/index.js" defer></script>
+</body>
+</html>

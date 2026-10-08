@@ -1,0 +1,13 @@
+{
+  "name": "fe-trick-game-2026",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "api": "json-server --watch db.json --port 3000",
+    "test": "node tests/run-tests.js"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "json-server": "^1.0.0-beta.15"
+  }
+}
